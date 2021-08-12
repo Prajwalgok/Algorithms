@@ -1,3 +1,6 @@
+// As The Number Can be Quite Large , We are Calculating it modulo 1000000007
+// Expected Time Complexity : O(n+m)
+// Factorials are Precalculated
 long long int mod = 1e9 + 7
 long long int fact[200005];
 void factorial()
@@ -21,17 +24,17 @@ void count_topo(int n,int T[],vector v[])
    	  c++;
    	  for(auto z : v[i])
    	  {
-   	  	 if(pos[z]>pos[i])
-   	  	 {
-   	  	 	mn=min(mn,pos[z]);
-   	  	 }
+            if(pos[z]>pos[i])
+            {
+              mn=min(mn,pos[z]);
+            }
    	  }
    	  if(mn==(i+1))
    	  {
-      count=(count*fact[c])%mod;
-      c=0;
-      mn=n;
-      }
+            count=(count*fact[c])%mod;
+            c=0;
+            mn=n;
+        }
    }
    cout<<count;
 }
