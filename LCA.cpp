@@ -21,13 +21,28 @@ void dfs(int node,vector <int> v[])
    }
 }
 
+// Gives Kth ancestor of node u
+int ancestor(int u,int k)
+{
+    for(int i=z-1;i>=0;i--)
+    {
+    	if((1<<i)<=k)
+    	{
+    		cout<<i<<' '<<k<<' '<<u<<"\n";
+    		k-=(1<<i);
+            u=Parent[u][i];
+    	}
+    	if(u==-1) break;
+    }
+    return u;
+}
 int lca(int u,int v)
 {
     if(level[u]<level[v]) swap(u,v);
 
     for(int i=z-1;i>=0;i--)
     {
-    	if((level[u]-(1>>i))>=level[v])
+    	if((level[u]-(1<<i))>=level[v])
     	{
     		u=Parent[u][i];
     	}
@@ -71,24 +86,14 @@ int main()
   visited[1]=0;
   dfs(1,v);
   // 2^i th  parent of x == 2^(i-1) th parent of 2^(i-1) th parent of x
-  for(int i=1;i<z;i++)
+  for(int j=1;j<z;j++)
   {
-      for(int j=1;j<=n;j++)
+      for(int i=1;i<=n;i++)
       {
           if(Parent[i][j-1]!=-1)
           {
-          	 Parent[i][j]=Parent[Parent[i][j-1]][j];
+          	 Parent[i][j]=Parent[Parent[i][j-1]][j-1];
           }
       }
   }
-  for(int i=1;i<=4;i++)
-  {
-  	cout<<"Node= "<<i<<' '<<level[i]<<"\n";
-  	for(int j=0;j<5;j++)
-  	{
-  		cout<<Parent[i][j]<<' ';
-  	}
-  	cout<<"\n";
-  }
-
 }
