@@ -12,12 +12,12 @@ void dfs(int node,vector <int> v[])
    visited[node]=1;
    for(auto x : v[node])
    {
-   	  if(!visited[x])
-   	  {
-   	  	    Parent[x][0]=node;
-   	  	    level[x]=1+level[node];
-            dfs(x,v);
-   	  }
+      if(!visited[x])
+       {
+	Parent[x][0]=node;
+	level[x]=1+level[node];
+	dfs(x,v);
+       }
    }
 }
 
@@ -28,9 +28,8 @@ int ancestor(int u,int k)
     {
     	if((1<<i)<=k)
     	{
-    		cout<<i<<' '<<k<<' '<<u<<"\n";
-    		k-=(1<<i);
-            u=Parent[u][i];
+          k-=(1<<i);
+          u=Parent[u][i];
     	}
     	if(u==-1) break;
     }
@@ -44,7 +43,7 @@ int lca(int u,int v)
     {
     	if((level[u]-(1<<i))>=level[v])
     	{
-    		u=Parent[u][i];
+    	  u=Parent[u][i];
     	}
     }
 
@@ -56,8 +55,8 @@ int lca(int u,int v)
     {
     	if(Parent[u][i]!=-1 && Parent[u][i]!=Parent[v][i])
     	{
-    		u=Parent[u][i];
-    		v=Parent[v][i];
+	 u=Parent[u][i];
+	 v=Parent[v][i];
     	}
     }
 
@@ -66,7 +65,7 @@ int lca(int u,int v)
 
 int dis(int u,int v)
 {
-	return level[u]+level[v]-2*level[lca(u,v)];
+    return level[u]+level[v]-2*level[lca(u,v)];
 }
 int main()
 {
